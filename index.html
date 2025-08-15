@@ -1,713 +1,536 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taline Said - Science & Biology Educator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-        
-        .contact-item:hover {
-            transform: translateY(-2px);
-        }
-        
-        .main-content {
-            background: white;
-            margin-top: -50px;
-            position: relative;
-            z-index: 3;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .section {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #2d3748;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-        
-        .summary {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
-        
-        .summary p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-        
-        .experience-grid {
-            display: grid;
-            gap: 30px;
-        }
-        
-        .job-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .job-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 0 15px 0 100px;
-        }
-        
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .job-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-        
-        .company {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .period {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        
-        .job-description {
-            list-style: none;
-        }
-        
-        .job-description li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            color: #4a5568;
-        }
-        
-        .job-description li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-        
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .education-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-top: 4px solid #f093fb;
-            transition: transform 0.3s ease;
-        }
-        
-        .education-card:hover {
-            transform: translateY(-3px);
-        }
-        
-        .degree {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin-bottom: 10px;
-        }
-        
-        .institution {
-            color: #f093fb;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .year {
-            color: #718096;
-            font-style: italic;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .skill-category {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-        
-        .skill-category h3 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-        }
-        
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        
-        .skill-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        
-        .certificate-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #667eea;
-            transition: transform 0.3s ease;
-        }
-        
-        .certificate-card:hover {
-            transform: translateY(-2px);
-        }
-        
-        .cert-title {
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        
-        .cert-issuer {
-            color: #667eea;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        
-        .cert-year {
-            color: #718096;
-            font-size: 0.85rem;
-        }
-        
-        .footer {
-            background: #2d3748;
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .job-header {
-                flex-direction: column;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-        
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
-            z-index: 1000;
-        }
-        
-        .scroll-progress {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taline Said — Creative Teaching Portfolio</title>
+  <meta name="description" content="Creative portfolio of Taline Said — Science & Biology Educator and Curriculum Developer." />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    /* =========
+       THEME & TOKENS
+       ========= */
+    :root{
+      --h: 268;            /* Accent hue (change via color dots or JS) */
+      --s: 85%;
+      --l: 58%;
+      --bg: #0a0b10;
+      --fg: #e8ecf2;
+      --muted: #a6b0bf;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 20px 40px rgba(0,0,0,.35);
+      --radius: 16px;
+      --accent: hsl(var(--h) var(--s) var(--l));
+      --accent-2: hsl(calc(var(--h) + 40) 80% 60%);
+      --accent-3: hsl(calc(var(--h) - 40) 80% 60%);
+      --grad: conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #fcfdff;
+        --fg: #102132;
+        --muted: #516170;
+        --card: rgba(0,0,0,0.04);
+        --glass: rgba(0,0,0,0.05);
+        --border: rgba(0,0,0,0.10);
+        --shadow: 0 20px 40px rgba(0,0,0,.12);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      background: radial-gradient(1200px 800px at 10% -10%, hsl(var(--h) 50% 14% / .35), transparent 60%),
+                  radial-gradient(900px 600px at 110% -20%, hsl(calc(var(--h)+60) 55% 16% / .35), transparent 60%),
+                  var(--bg);
+      color:var(--fg);
+      font:16px/1.65 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji";
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    /* =========
+       GLOBAL UI
+       ========= */
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .section{margin:48px 0}
+    h1,h2,h3{margin:0 0 12px}
+    h2{font-size:clamp(22px,2.6vw,28px)}
+    h3{font-size:clamp(18px,2.0vw,22px)}
+    p{margin:0 0 10px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      padding:7px 10px;border-radius:999px;
+      background:linear-gradient(180deg, var(--glass), transparent);
+      border:1px solid var(--border);font-size:14px
+    }
+    .card{
+      background:linear-gradient(180deg, var(--glass), transparent);
+      border:1px solid var(--border);border-radius:var(--radius);padding:18px;
+      box-shadow:var(--shadow);
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .grid{display:grid;gap:16px}
+    .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;border:1px solid var(--border);
+      background:linear-gradient(180deg, var(--glass), transparent);box-shadow:var(--shadow);
+      text-decoration:none;font-weight:700
+    }
+    .soft{color:var(--muted);font-size:14px}
+
+    /* =========
+       PROGRESS BAR
+       ========= */
+    .progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:1000}
+    .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear}
+
+    /* =========
+       HERO
+       ========= */
+    header.hero{
+      position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+      background:
+       radial-gradient(1200px 500px at 50% -30%, hsl(var(--h) 80% 55% / .10), transparent 60%),
+       radial-gradient(700px 400px at 90% -20%, hsl(calc(var(--h) + 40) 80% 55% / .10), transparent 60%);
+    }
+    .hero .inner{display:grid;grid-template-columns: 1.1fr .9fr;gap:24px;align-items:center}
+    @media (max-width:900px){ .hero .inner{grid-template-columns:1fr} }
+    .hero .name{
+      font-weight:900;letter-spacing:.4px;line-height:1.08;
+      font-size:clamp(32px,6.5vw,56px);
+      background:linear-gradient(90deg, var(--accent), var(--accent-2) 40%, var(--accent-3));
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 6px 16px rgba(0,0,0,.25));
+    }
+    .hero .tag{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin-top:6px}
+    .statline{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .stat{
+      padding:8px 12px;border-radius:999px;border:1px solid var(--border);
+      background:linear-gradient(180deg, var(--glass), transparent);
+      font-weight:700;font-size:14px
+    }
+    .hero .card{position:relative;transform:translateZ(0)}
+    .blob{
+      position:absolute;inset:auto;pointer-events:none;filter:blur(30px) saturate(120%);opacity:.5
+    }
+    .blob.b1{width:420px;height:420px;right:-100px;top:-100px;background:radial-gradient(circle at 30% 30%, var(--accent) 0 40%, transparent 60%)}
+    .blob.b2{width:360px;height:360px;left:-120px;bottom:-120px;background:radial-gradient(circle at 70% 70%, var(--accent-2) 0 40%, transparent 60%)}
+    @media (prefers-reduced-motion:no-preference){
+      .blob{animation:float 14s ease-in-out infinite}
+      .blob.b2{animation-duration:18s}
+      @keyframes float{
+        0%,100%{transform:translateY(0) rotate(0)}
+        50%{transform:translateY(-18px) rotate(10deg)}
+      }
+    }
+
+    /* =========
+       SIDE TOOLBAR
+       ========= */
+    .toolbar{
+      position:fixed;right:16px;bottom:16px;z-index:1000;display:flex;flex-direction:column;gap:10px
+    }
+    .tool{
+      width:48px;height:48px;border-radius:12px;border:1px solid var(--border);display:grid;place-items:center;
+      background:linear-gradient(180deg,var(--glass),transparent);box-shadow:var(--shadow);cursor:pointer
+    }
+    .dots{display:flex;gap:6px;padding:8px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,var(--glass),transparent)}
+    .dot{width:18px;height:18px;border-radius:999px;outline:2px solid rgba(0,0,0,.15);cursor:pointer}
+    .dot:focus-visible{outline:3px solid var(--fg)}
+
+    /* =========
+       SECTION-SPECIFIC
+       ========= */
+    .kv{display:grid;grid-template-columns:140px 1fr;gap:10px}
+    .kv div:nth-child(odd){color:var(--muted)}
+    .timeline{position:relative;margin-left:10px;padding-left:18px}
+    .timeline::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--accent-2))}
+    .timeline .item{position:relative;margin:12px 0;padding:10px 14px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg,var(--glass),transparent)}
+    .timeline .item::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+    .meta{color:var(--muted);font-size:14px;margin-bottom:6px}
+    ul{margin:0 0 0 18px;padding:0}
+    li{margin:4px 0}
+
+    /* Fancy cards */
+    .tilt{transition:transform .25s ease, box-shadow .25s ease}
+    .tilt:hover{transform:translateY(-4px) rotate(-.25deg)}
+    .ring{
+      position:relative;border-radius:var(--radius);padding:1px;background:conic-gradient(from 220deg,var(--accent),transparent 30%, var(--accent-2), transparent 70%, var(--accent-3))
+    }
+    .ring > .inner{
+      background:linear-gradient(180deg, var(--glass), transparent);
+      border-radius:calc(var(--radius) - 2px);padding:16px;border:1px solid var(--border)
+    }
+
+    /* PRINT */
+    @media print{
+      .toolbar,.progress{display:none !important}
+      body{background:#fff;color:#000}
+      a{text-decoration:none}
+      .card,.ring,.timeline .item{break-inside:avoid}
+    }
+  </style>
 </head>
-<body>
-    <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
+<body itemscope itemtype="https://schema.org/Person">
+  <!-- Scroll Progress -->
+  <div class="progress" aria-hidden="true"><div class="bar"></div></div>
+
+  <!-- Floating Tools: theme, accent colors, print -->
+  <div class="toolbar" aria-label="Quick actions">
+    <button class="tool" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌗</button>
+    <div class="dots" role="group" aria-label="Accent colors">
+      <button class="dot" style="background:hsl(268 85% 58%)" data-hue="268" aria-label="Violet"></button>
+      <button class="dot" style="background:hsl(200 85% 50%)" data-hue="200" aria-label="Blue"></button>
+      <button class="dot" style="background:hsl(150 80% 45%)" data-hue="150" aria-label="Green"></button>
+      <button class="dot" style="background:hsl(28 90% 56%)" data-hue="28" aria-label="Orange"></button>
+      <button class="dot" style="background:hsl(340 85% 58%)" data-hue="340" aria-label="Pink"></button>
     </div>
-    
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Taline Said</h1>
-                <p>Passionate Science & Biology Educator</p>
-                <div class="contact-info">
-                    <a href="mailto:taleensaeed8@gmail.com" class="contact-item">
-                        <span>📧</span>
-                        <span>taleensaeed8@gmail.com</span>
-                    </a>
-                    <div class="contact-item">
-                        <span>📱</span>
-                        <span>+961 71 065 292</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>Lebanon</span>
-                    </div>
-                </div>
-            </div>
+    <button class="tool" id="printBtn" title="Save as PDF" aria-label="Save as PDF">🖨</button>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container inner">
+      <div>
+        <h1 class="name" itemprop="name">Taline Said</h1>
+        <div class="tag" itemprop="jobTitle">Science &amp; Biology Educator · Curriculum Developer</div>
+        <div class="statline" aria-label="Highlights">
+          <span class="stat">AP / A‑Level &amp; AS</span>
+          <span class="stat">Inquiry‑based learning</span>
+          <span class="stat">Lab &amp; safety</span>
+          <span class="stat">Assessments &amp; data</span>
         </div>
+        <div class="chips" style="margin-top:10px">
+          <span class="chip">American &amp; British curricula</span>
+          <span class="chip">Middle &amp; High School</span>
+          <span class="chip">University Biology</span>
+        </div>
+        <div style="margin-top:16px" class="chips">
+          <a class="pill" href="#experience">View Experience ↘</a>
+          <a class="pill" href="mailto:taleensaeed8@gmail.com" itemprop="email">Email Me</a>
+          <a class="pill" href="tel:+96171065292" itemprop="telephone">Call</a>
+        </div>
+      </div>
+
+      <div class="card tilt">
+        <div class="kv">
+          <div>Location</div><div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressCountry">Lebanon</span></div>
+          <div>Email</div><div><a href="mailto:taleensaeed8@gmail.com">taleensaeed8@gmail.com</a></div>
+          <div>Phone</div><div><a href="tel:+96171065292">+961&nbsp;71&nbsp;065&nbsp;292</a></div>
+        </div>
+        <p class="soft" style="margin-top:10px">
+          Passionate Science & Biology teacher delivering engaging, hands‑on learning across American and British standards; experienced in curriculum design, lab safety, and data‑informed instruction with strong family–school collaboration.
+        </p>
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <h2>Skills &amp; Tools</h2>
+      <div class="grid cols-3">
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>Instruction &amp; Curriculum</h3>
+            <ul>
+              <li>Curriculum alignment (US/UK)</li>
+              <li>Inquiry‑ &amp; project‑based learning</li>
+              <li>Differentiation &amp; inclusion</li>
+              <li>Formative &amp; summative assessment</li>
+              <li>Lab management &amp; safety</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>EdTech &amp; Platforms</h3>
+            <ul>
+              <li>MS Office · Google Classroom</li>
+              <li>Gizmos · Kahoot! · Quizlet</li>
+              <li>SimBio · Labster · STEM lab equipment</li>
+              <li>Google/Microsoft Forms</li>
+              <li>Alison · TES · Coursera · McGraw Hill</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>Strengths</h3>
+            <ul>
+              <li>Communication &amp; collaboration</li>
+              <li>Leadership &amp; classroom management</li>
+              <li>Time management &amp; adaptability</li>
+              <li>Critical thinking &amp; problem solving</li>
+              <li>Student wellness &amp; pastoral care</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <div class="main-content">
-        <section class="summary">
-            <div class="container">
-                <p>A passionate and dedicated Science and Biology teacher with extensive experience in curriculum development and delivering engaging lessons. Skilled in using inquiry-based learning, hands-on experiments, and differentiated instruction to foster student engagement and critical thinking. Committed to continuous professional development and applying innovative teaching methods.</p>
-            </div>
-        </section>
-
-        <section class="section" id="experience">
-            <div class="container">
-                <h2 class="section-title">Professional Experience</h2>
-                <div class="experience-grid">
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Online Tutor</div>
-                                <div class="company">International Students</div>
-                            </div>
-                            <div class="period">2024-2025</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Teaching biology, chemistry and science for middle and high school students</li>
-                            <li>Teaching biology and educational courses to university students</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Science & Biology Teacher</div>
-                                <div class="company">Al Majd Charter School - UAE</div>
-                            </div>
-                            <div class="period">2022-2024</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Designed and delivered engaging Biology lessons for middle and high school students</li>
-                            <li>Led curriculum development efforts aligned with American educational standards</li>
-                            <li>Monitored student progress through ongoing assessments</li>
-                            <li>Managed classroom, laboratory, and field trip activities</li>
-                            <li>Collaborated with faculty, parents, and school leadership</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Biology Teacher</div>
-                                <div class="company">British International School - Kurdistan</div>
-                            </div>
-                            <div class="period">2022</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Delivered comprehensive AP, A-levels, and AS Biology lessons</li>
-                            <li>Designed inquiry-based teaching methods for advanced biological concepts</li>
-                            <li>Integrated laboratory experiments and fieldwork</li>
-                            <li>Provided targeted feedback for academic growth</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Science Teacher</div>
-                                <div class="company">The International School of Choueifat - Iraq</div>
-                            </div>
-                            <div class="period">2021-2022</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Delivered dynamic science lessons using the Sabis curriculum</li>
-                            <li>Designed hands-on experiments and demonstrations</li>
-                            <li>Assessed student progress through regular evaluations</li>
-                            <li>Collaborated with colleagues on instructional strategies</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Science Teacher (Biology, Chemistry, Health)</div>
-                                <div class="company">Access International School - Lebanon</div>
-                            </div>
-                            <div class="period">2017-2020</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Delivered comprehensive lessons following American and Lebanese curricula</li>
-                            <li>Prepared students for AP Biology and Chemistry exams</li>
-                            <li>Designed engaging experiments and demonstrations</li>
-                            <li>Coordinated health education initiatives</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div>
-                                <div class="job-title">Pharmacist</div>
-                                <div class="company">Pharmavie & Omaya's Pharmacy - Lebanon</div>
-                            </div>
-                            <div class="period">2013-2015</div>
-                        </div>
-                        <ul class="job-description">
-                            <li>Dispensed medications according to physician prescriptions</li>
-                            <li>Provided patient counseling on medications and side effects</li>
-                            <li>Conducted health screenings and administered immunizations</li>
-                            <li>Maintained accurate customer records and inventory management</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="education">
-            <div class="container">
-                <h2 class="section-title">Education</h2>
-                <div class="education-grid">
-                    <div class="education-card">
-                        <div class="degree">Master of Education (M.Ed.)</div>
-                        <div class="institution">Educational Management</div>
-                        <div class="institution">Lebanese International University</div>
-                        <div class="year">2018-2020 • Graduated with Distinction</div>
-                    </div>
-                    
-                    <div class="education-card">
-                        <div class="degree">Teaching Diploma</div>
-                        <div class="institution">Lebanese International University</div>
-                        <div class="year">2016-2017 • Graduated with Distinction</div>
-                    </div>
-                    
-                    <div class="education-card">
-                        <div class="degree">Bachelor of Arts in Teaching Education</div>
-                        <div class="institution">Biology-Chemistry</div>
-                        <div class="institution">Lebanese International University</div>
-                        <div class="year">2014-2017 • Honor GPA & Dean's Honor List</div>
-                    </div>
-                    
-                    <div class="education-card">
-                        <div class="degree">Bachelor in Pharmacy (B.Pharm)</div>
-                        <div class="institution">Lebanese International University</div>
-                        <div class="year">2011-2015</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="skills" style="background: linear-gradient(135deg, #f7fafc, #edf2f7);">
-            <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>Technical Skills</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">MS Office Suite</span>
-                            <span class="skill-tag">Google Classroom</span>
-                            <span class="skill-tag">AI Platforms</span>
-                            <span class="skill-tag">LMS Systems</span>
-                            <span class="skill-tag">Interactive Tools</span>
-                            <span class="skill-tag">EdTech Tools</span>
-                            <span class="skill-tag">STEM Lab Equipment</span>
-                            <span class="skill-tag">Data Analysis</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Arabic (Native)</span>
-                            <span class="skill-tag">English (Fluent)</span>
-                            <span class="skill-tag">French (Intermediate)</span>
-                            <span class="skill-tag">Turkish (Intermediate)</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Core Competencies</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Communication</span>
-                            <span class="skill-tag">Critical Thinking</span>
-                            <span class="skill-tag">Leadership</span>
-                            <span class="skill-tag">Collaboration</span>
-                            <span class="skill-tag">Adaptability</span>
-                            <span class="skill-tag">Problem-Solving</span>
-                            <span class="skill-tag">Time Management</span>
-                            <span class="skill-tag">Empathy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="certificates">
-            <div class="container">
-                <h2 class="section-title">Certificates & Awards</h2>
-                <div class="certificates-grid">
-                    <div class="certificate-card">
-                        <div class="cert-title">Top MAP Teacher Performance Award</div>
-                        <div class="cert-issuer">Al Majd Charter School</div>
-                        <div class="cert-year">UAE 2023-2024</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">AI for Educators Certificate</div>
-                        <div class="cert-issuer">Alison</div>
-                        <div class="cert-year">Online 2024</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">EMPOWER HER 2024</div>
-                        <div class="cert-issuer">London Intercultural Center (LIC)</div>
-                        <div class="cert-year">London 2024</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">Emergency First Aid at Work</div>
-                        <div class="cert-issuer">Professional Certification</div>
-                        <div class="cert-year">London 2023</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">Children & Young People's Mental Health Diploma</div>
-                        <div class="cert-issuer">Centre of Excellence</div>
-                        <div class="cert-year">London 2021 • Distinction</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">Assessment for Learning & Inquiry-Based Learning</div>
-                        <div class="cert-issuer">TES</div>
-                        <div class="cert-year">Online 2023</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">Coaching Skills for Educational Leaders</div>
-                        <div class="cert-issuer">TES</div>
-                        <div class="cert-year">Online 2023</div>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="cert-title">STEM Inquiry & Effect of Mindset</div>
-                        <div class="cert-issuer">Gizmos</div>
-                        <div class="cert-year">Online 2021</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Taline Said. Passionate Science & Biology Educator committed to inspiring the next generation.</p>
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="item tilt">
+          <h3>Online Tutoring — International Students</h3>
+          <div class="meta">Science, Biology &amp; Chemistry Tutor · 2024–2025</div>
+          <ul>
+            <li>Teach Biology, Chemistry, and Science to middle/high‑school students internationally.</li>
+            <li>Provide Biology and education courses to university students.</li>
+          </ul>
         </div>
-    </footer>
 
-    <script>
-        // Scroll progress indicator
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset;
-            const docHeight = document.body.offsetHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
-        });
+        <div class="item tilt">
+          <h3>Al Majd Charter School (Adar Education) — UAE</h3>
+          <div class="meta">Science &amp; Biology Teacher · 2022–2024</div>
+          <ul>
+            <li>Designed engaging Biology units; differentiated for diverse learners.</li>
+            <li>Led curriculum development aligned to American standards; inquiry‑based strategies.</li>
+            <li>Used ongoing assessments to adapt instruction and improve outcomes.</li>
+            <li>Managed labs and field activities with strong safety protocols.</li>
+            <li>Collaborated with parents, faculty, and leadership to support achievement.</li>
+          </ul>
+        </div>
 
-        // Smooth scroll for any internal links (if added later)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        <div class="item tilt">
+          <h3>British International School — Kurdistan</h3>
+          <div class="meta">Biology Teacher · 2022</div>
+          <ul>
+            <li>Delivered AP, A‑Level, and AS Biology; aligned with US/UK standards.</li>
+            <li>Inquiry‑based lessons to build mastery of advanced concepts.</li>
+            <li>Integrated labs and fieldwork to reinforce theory and critical thinking.</li>
+          </ul>
+        </div>
 
-        // Add animation to elements when they come into view
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        <div class="item tilt">
+          <h3>The International School of Choueifat — Iraq</h3>
+          <div class="meta">Science Teacher · 2021–2022</div>
+          <ul>
+            <li>Dynamic middle‑school science using the SABIS curriculum.</li>
+            <li>Hands‑on experiments and demos to deepen understanding.</li>
+            <li>Targeted feedback via quizzes, projects, and labs.</li>
+          </ul>
+        </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0s';
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                }
-            });
-        }, observerOptions);
+        <div class="item tilt">
+          <h3>Access International School — Lebanon</h3>
+          <div class="meta">Science Teacher (Biology, Chemistry, Health) · 2017–2020</div>
+          <ul>
+            <li>Delivered Biology, Chemistry &amp; Health; prepared students for AP exams.</li>
+            <li>Planned engaging experiments and promoted safe lab practices.</li>
+            <li>Tracked performance and provided constructive feedback.</li>
+          </ul>
+        </div>
 
-        // Observe all cards and sections for animation
-        document.querySelectorAll('.job-card, .education-card, .skill-category, .certificate-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            observer.observe(el);
-        });
-    </script>
+        <div class="item tilt">
+          <h3>Khalwat Falougha Official School — Lebanon</h3>
+          <div class="meta">Science Teacher · 2016–2017</div>
+          <ul>
+            <li>80 hours of classroom observation; assisted Grade 5 lessons.</li>
+            <li>Independently taught Grade 5 Science using active learning.</li>
+          </ul>
+        </div>
+
+        <div class="item tilt">
+          <h3>Qoubbei Institute (After School) — Lebanon</h3>
+          <div class="meta">Science Instructor · 2016–2017</div>
+          <ul>
+            <li>Biology, Chemistry, and Science; prepared students for official &amp; university exams.</li>
+          </ul>
+        </div>
+
+        <div class="item tilt">
+          <h3>Private Tutor — Lebanon &amp; International</h3>
+          <div class="meta">Science, Chemistry &amp; Biology Tutor · 2012–2021</div>
+          <ul>
+            <li>Personalized tutoring with custom study materials and plans.</li>
+            <li>Regular checks for understanding and strategy adjustments.</li>
+          </ul>
+        </div>
+
+        <div class="item tilt">
+          <h3>Pharmavie &amp; Omaya’s Pharmacies — Lebanon</h3>
+          <div class="meta">Pharmacist · 2013–2015</div>
+          <ul>
+            <li>Dispensed medications accurately; counseled on therapy and side effects.</li>
+            <li>Health screenings; supported immunization services.</li>
+            <li>Maintained compliance and inventory.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <h2>Education</h2>
+      <div class="grid cols-2">
+        <div class="card tilt">
+          <h3>Master of Education (M.Ed.)</h3>
+          <div class="meta">Educational Management — Lebanese International University · 2018–2020</div>
+          <ul><li>Graduated with distinction</li></ul>
+        </div>
+        <div class="card tilt">
+          <h3>Teaching Diploma</h3>
+          <div class="meta">Lebanese International University · 2016–2017</div>
+          <ul><li>Graduated with distinction</li></ul>
+        </div>
+        <div class="card tilt">
+          <h3>BA — Teaching Education (Biology–Chemistry)</h3>
+          <div class="meta">Lebanese International University · 2014–2017</div>
+          <ul><li>Honor GPA · Dean’s Honor List</li></ul>
+        </div>
+        <div class="card tilt">
+          <h3>BA in Pharmacy (B.Pharm) — Undergraduate</h3>
+          <div class="meta">Lebanese International University · 2011–2015</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs" class="section">
+      <h2>Certifications &amp; Awards</h2>
+      <div class="grid cols-3">
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>Highlights</h3>
+            <ul>
+              <li><strong>Top MAP Teacher Performance</strong> — Al Majd Charter School (Girls School), UAE · 2023–2024</li>
+              <li><strong>Smarter Teaching, Not Harder: How AI Can Actually Help?</strong> — McGraw Hill · 2025</li>
+              <li><strong>AI for Educators</strong> — Alison · 2024</li>
+              <li><strong>ADEK: PISA 2025 / PIRLS 2026</strong> — 2024</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>Safety &amp; Wellbeing</h3>
+            <ul>
+              <li>Emergency First Aid at Work — 2023</li>
+              <li>Children &amp; Young People’s Mental Health (Distinction) — 2021</li>
+              <li>Fire Safety · Health &amp; Safety (TES/Aldar) — 2022–2023</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ring tilt">
+          <div class="inner">
+            <h3>Pedagogy &amp; Digital Learning</h3>
+            <ul>
+              <li>Flipped Classroom, Assessment for Learning — TES · 2023</li>
+              <li>Scaling Skills with Digital Learning — THE/Coursera · 2021</li>
+              <li>STEM Inquiry &amp; Mindset — Gizmos · 2021</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="soft" style="margin-top:8px">Full list available on request.</p>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section id="languages" class="section">
+      <h2>Languages</h2>
+      <div class="chips">
+        <span class="chip"><strong>Arabic</strong> — Native</span>
+        <span class="chip"><strong>English</strong> — Fluent</span>
+        <span class="chip"><strong>French</strong> — Intermediate</span>
+        <span class="chip"><strong>Turkish</strong> — Intermediate</span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="grid cols-2">
+        <div class="card tilt">
+          <div class="kv">
+            <div>Email</div><div><a href="mailto:taleensaeed8@gmail.com">taleensaeed8@gmail.com</a></div>
+            <div>Phone</div><div><a href="tel:+96171065292">+961 71 065 292</a></div>
+            <div>Location</div><div>Lebanon</div>
+          </div>
+        </div>
+        <div class="card tilt">
+          <p><strong>Tip:</strong> Use the printer icon (bottom‑right) to export a polished PDF for applications.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container soft">
+    © <span itemprop="name">Taline Said</span>. <span id="stamp"></span>. Built with love and CSS gradients.
+  </footer>
+
+  <!-- Minimal JS for theme, accent, progress, print -->
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    const printBtn = document.getElementById('printBtn');
+    const dots = document.querySelectorAll('.dot');
+    const root = document.documentElement;
+
+    // Persisted theme
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme){ document.documentElement.dataset.theme = savedTheme; }
+    themeBtn.addEventListener('click', () => {
+      const cur = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = cur;
+      if(cur === 'light'){
+        // Light overrides via data-theme
+        root.style.setProperty('--bg', '#fcfdff');
+        root.style.setProperty('--fg', '#102132');
+        root.style.setProperty('--muted', '#516170');
+        root.style.setProperty('--card', 'rgba(0,0,0,0.04)');
+        root.style.setProperty('--glass', 'rgba(0,0,0,0.05)');
+        root.style.setProperty('--border', 'rgba(0,0,0,0.10)');
+        root.style.setProperty('--shadow', '0 20px 40px rgba(0,0,0,.12)');
+      }else{
+        root.style.removeProperty('--bg');
+        root.style.removeProperty('--fg');
+        root.style.removeProperty('--muted');
+        root.style.removeProperty('--card');
+        root.style.removeProperty('--glass');
+        root.style.removeProperty('--border');
+        root.style.removeProperty('--shadow');
+      }
+      localStorage.setItem('theme', cur);
+    });
+
+    // Accent color switching
+    dots.forEach(d => d.addEventListener('click', () => {
+      const hue = d.getAttribute('data-hue');
+      root.style.setProperty('--h', hue);
+      try{ localStorage.setItem('hue', hue); }catch(e){}
+    }));
+    const savedHue = localStorage.getItem('hue');
+    if(savedHue){ root.style.setProperty('--h', savedHue); }
+
+    // Print
+    printBtn.addEventListener('click', () => window.print());
+
+    // Footer stamp
+    const stamp = document.getElementById('stamp');
+    const now = new Date();
+    const fmt = now.toLocaleString(undefined, { month: 'long', day:'numeric', year:'numeric' });
+    stamp.textContent = Last updated ${fmt};
+
+    // Scroll progress
+    const bar = document.querySelector('.progress .bar');
+    const onScroll = () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
 </body>
 </html>
