@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taline Said — Creative Teaching Portfolio</title>
-  <meta name="description" content="Creative portfolio of Taline Said — Science & Biology Educator and Curriculum Developer." />
   <meta name="color-scheme" content="dark light" />
+  <title>Taline Said — Creative Responsive Teaching Portfolio</title>
+  <meta name="description" content="Creative, responsive portfolio of Taline Said — Science & Biology Educator and Curriculum Developer." />
   <style>
-    /* =========
-       THEME & TOKENS
-       ========= */
+    /* =========================
+       THEME TOKENS (Mobile-first)
+       ========================= */
     :root{
-      --h: 268;            /* Accent hue (change via color dots or JS) */
+      --h: 268; /* Accent hue */
       --s: 85%;
       --l: 58%;
       --bg: #0a0b10;
@@ -20,12 +20,19 @@
       --card: rgba(255,255,255,0.06);
       --glass: rgba(255,255,255,0.08);
       --border: rgba(255,255,255,0.14);
-      --shadow: 0 20px 40px rgba(0,0,0,.35);
+      --shadow: 0 16px 36px rgba(0,0,0,.35);
       --radius: 16px;
       --accent: hsl(var(--h) var(--s) var(--l));
       --accent-2: hsl(calc(var(--h) + 40) 80% 60%);
       --accent-3: hsl(calc(var(--h) - 40) 80% 60%);
-      --grad: conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+
+      /* Fluid type scale */
+      --step--1: clamp(12px, 0.77rem + 0.1vw, 14px);
+      --step-0: clamp(14px, 0.85rem + 0.25vw, 16px);
+      --step-1: clamp(18px, 1.0rem + 0.5vw, 20px);
+      --step-2: clamp(22px, 1.2rem + 0.9vw, 28px);
+      --step-3: clamp(28px, 1.4rem + 1.6vw, 40px);
+      --step-4: clamp(34px, 1.6rem + 2.6vw, 56px);
     }
     @media (prefers-color-scheme: light){
       :root{
@@ -35,145 +42,132 @@
         --card: rgba(0,0,0,0.04);
         --glass: rgba(0,0,0,0.05);
         --border: rgba(0,0,0,0.10);
-        --shadow: 0 20px 40px rgba(0,0,0,.12);
+        --shadow: 0 16px 36px rgba(0,0,0,.12);
       }
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
+    * { box-sizing: border-box }
+    html,body{ margin:0; padding:0 }
     body{
-      background: radial-gradient(1200px 800px at 10% -10%, hsl(var(--h) 50% 14% / .35), transparent 60%),
-                  radial-gradient(900px 600px at 110% -20%, hsl(calc(var(--h)+60) 55% 16% / .35), transparent 60%),
-                  var(--bg);
-      color:var(--fg);
-      font:16px/1.65 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji";
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-    }
-
-    /* =========
-       GLOBAL UI
-       ========= */
-    .container{max-width:1100px;margin:0 auto;padding:24px}
-    .section{margin:48px 0}
-    h1,h2,h3{margin:0 0 12px}
-    h2{font-size:clamp(22px,2.6vw,28px)}
-    h3{font-size:clamp(18px,2.0vw,22px)}
-    p{margin:0 0 10px}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{
-      padding:7px 10px;border-radius:999px;
-      background:linear-gradient(180deg, var(--glass), transparent);
-      border:1px solid var(--border);font-size:14px
-    }
-    .card{
-      background:linear-gradient(180deg, var(--glass), transparent);
-      border:1px solid var(--border);border-radius:var(--radius);padding:18px;
-      box-shadow:var(--shadow);
-      backdrop-filter:saturate(120%) blur(6px);
-    }
-    .grid{display:grid;gap:16px}
-    .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 14px;border-radius:999px;border:1px solid var(--border);
-      background:linear-gradient(180deg, var(--glass), transparent);box-shadow:var(--shadow);
-      text-decoration:none;font-weight:700
-    }
-    .soft{color:var(--muted);font-size:14px}
-
-    /* =========
-       PROGRESS BAR
-       ========= */
-    .progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:1000}
-    .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .1s linear}
-
-    /* =========
-       HERO
-       ========= */
-    header.hero{
-      position:relative;overflow:hidden;border-bottom:1px solid var(--border);
       background:
-       radial-gradient(1200px 500px at 50% -30%, hsl(var(--h) 80% 55% / .10), transparent 60%),
-       radial-gradient(700px 400px at 90% -20%, hsl(calc(var(--h) + 40) 80% 55% / .10), transparent 60%);
-    }
-    .hero .inner{display:grid;grid-template-columns: 1.1fr .9fr;gap:24px;align-items:center}
-    @media (max-width:900px){ .hero .inner{grid-template-columns:1fr} }
-    .hero .name{
-      font-weight:900;letter-spacing:.4px;line-height:1.08;
-      font-size:clamp(32px,6.5vw,56px);
-      background:linear-gradient(90deg, var(--accent), var(--accent-2) 40%, var(--accent-3));
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-      filter:drop-shadow(0 6px 16px rgba(0,0,0,.25));
-    }
-    .hero .tag{font-size:clamp(16px,2.2vw,20px);color:var(--muted);margin-top:6px}
-    .statline{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .stat{
-      padding:8px 12px;border-radius:999px;border:1px solid var(--border);
-      background:linear-gradient(180deg, var(--glass), transparent);
-      font-weight:700;font-size:14px
-    }
-    .hero .card{position:relative;transform:translateZ(0)}
-    .blob{
-      position:absolute;inset:auto;pointer-events:none;filter:blur(30px) saturate(120%);opacity:.5
-    }
-    .blob.b1{width:420px;height:420px;right:-100px;top:-100px;background:radial-gradient(circle at 30% 30%, var(--accent) 0 40%, transparent 60%)}
-    .blob.b2{width:360px;height:360px;left:-120px;bottom:-120px;background:radial-gradient(circle at 70% 70%, var(--accent-2) 0 40%, transparent 60%)}
-    @media (prefers-reduced-motion:no-preference){
-      .blob{animation:float 14s ease-in-out infinite}
-      .blob.b2{animation-duration:18s}
-      @keyframes float{
-        0%,100%{transform:translateY(0) rotate(0)}
-        50%{transform:translateY(-18px) rotate(10deg)}
-      }
+        radial-gradient(900px 600px at 12% -10%, hsl(var(--h) 50% 14% / .35), transparent 60%),
+        radial-gradient(700px 480px at 110% -20%, hsl(calc(var(--h)+60) 55% 16% / .35), transparent 60%),
+        var(--bg);
+      color: var(--fg);
+      font: var(--step-0)/1.65 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-wrap: anywhere;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: none;
     }
 
-    /* =========
-       SIDE TOOLBAR
-       ========= */
-    .toolbar{
-      position:fixed;right:16px;bottom:16px;z-index:1000;display:flex;flex-direction:column;gap:10px
-    }
-    .tool{
-      width:48px;height:48px;border-radius:12px;border:1px solid var(--border);display:grid;place-items:center;
-      background:linear-gradient(180deg,var(--glass),transparent);box-shadow:var(--shadow);cursor:pointer
-    }
-    .dots{display:flex;gap:6px;padding:8px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,var(--glass),transparent)}
-    .dot{width:18px;height:18px;border-radius:999px;outline:2px solid rgba(0,0,0,.15);cursor:pointer}
-    .dot:focus-visible{outline:3px solid var(--fg)}
+    /* Layout utilities */
+    .container{ max-width: 1100px; margin: 0 auto; padding: 20px }
+    @media (min-width: 480px){ .container{ padding: 24px } }
+    @media (min-width: 1200px){ .container{ padding: 28px } }
 
-    /* =========
-       SECTION-SPECIFIC
-       ========= */
-    .kv{display:grid;grid-template-columns:140px 1fr;gap:10px}
-    .kv div:nth-child(odd){color:var(--muted)}
-    .timeline{position:relative;margin-left:10px;padding-left:18px}
-    .timeline::before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--accent-2))}
-    .timeline .item{position:relative;margin:12px 0;padding:10px 14px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg,var(--glass),transparent)}
-    .timeline .item::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:6px}
-    ul{margin:0 0 0 18px;padding:0}
-    li{margin:4px 0}
+    .section{ margin: clamp(28px, 6vw, 56px) 0 }
+    h1,h2,h3{ margin: 0 0 10px }
+    h1{ font-size: var(--step-4) }
+    h2{ font-size: var(--step-2) }
+    h3{ font-size: var(--step-1) }
+    p, li{ font-size: var(--step-0) }
+    .soft{ color: var(--muted); font-size: var(--step--1) }
+    a{ color: var(--accent); text-decoration: none }
+    a:hover{ text-decoration: underline }
+    a:focus-visible, button:focus-visible{ outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px }
 
-    /* Fancy cards */
-    .tilt{transition:transform .25s ease, box-shadow .25s ease}
-    .tilt:hover{transform:translateY(-4px) rotate(-.25deg)}
-    .ring{
-      position:relative;border-radius:var(--radius);padding:1px;background:conic-gradient(from 220deg,var(--accent),transparent 30%, var(--accent-2), transparent 70%, var(--accent-3))
-    }
-    .ring > .inner{
-      background:linear-gradient(180deg, var(--glass), transparent);
-      border-radius:calc(var(--radius) - 2px);padding:16px;border:1px solid var(--border)
+    .chips{ display:flex; flex-wrap:wrap; gap:8px }
+    .chip{ padding:8px 10px; border-radius:999px; background:linear-gradient(180deg,var(--glass),transparent); border:1px solid var(--border); font-size: var(--step--1) }
+
+    .card{
+      background: linear-gradient(180deg, var(--glass), transparent);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(14px, 2.5vw, 20px);
+      box-shadow: var(--shadow);
+      backdrop-filter: saturate(120%) blur(6px);
     }
 
-    /* PRINT */
+    .grid{ display:grid; gap: clamp(12px, 2.5vw, 16px) }
+    .cols-2{ grid-template-columns: 1fr }
+    .cols-3{ grid-template-columns: 1fr }
+    @media (min-width: 640px){ .cols-2{ grid-template-columns: repeat(2, minmax(0,1fr)) } }
+    @media (min-width: 860px){ .cols-3{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
+
+    .pill{ display:inline-flex; align-items:center; gap:10px; min-height:44px;
+      padding:10px 14px; border-radius:999px; border:1px solid var(--border);
+      background:linear-gradient(180deg,var(--glass),transparent); box-shadow:var(--shadow); text-decoration:none; font-weight:700 }
+
+    /* Progress bar */
+    .progress{ position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 1000 }
+    .progress .bar{ height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .1s linear }
+
+    /* HERO */
+    header.hero{
+      position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(1200px 500px at 50% -30%, hsl(var(--h) 80% 55% / .10), transparent 60%),
+        radial-gradient(700px 400px at 90% -20%, hsl(calc(var(--h) + 40) 80% 55% / .10), transparent 60%);
+    }
+    .hero .inner{ display:grid; grid-template-columns: 1fr; gap: 20px; align-items: center }
+    @media (min-width: 920px){ .hero .inner{ grid-template-columns: 1.1fr .9fr } }
+    .hero .name{ font-weight: 900; letter-spacing: .4px; line-height: 1.08;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2) 40%, var(--accent-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,.25));
+    }
+    .hero .tag{ font-size: var(--step-1); color: var(--muted); margin-top: 6px }
+    .statline{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
+    .stat{ padding:8px 12px; border-radius:999px; border:1px solid var(--border);
+      background:linear-gradient(180deg,var(--glass),transparent); font-weight:700; font-size: var(--step--1) }
+    .tilt{ transition: transform .25s ease, box-shadow .25s ease }
+    @media (hover:hover) and (pointer:fine){ .tilt:hover{ transform: translateY(-4px) rotate(-.25deg) } }
+
+    .blob{ position:absolute; pointer-events:none; filter: blur(28px) saturate(120%); opacity:.5 }
+    .blob.b1{ width: 360px; height: 360px; right: -100px; top: -100px;
+      background: radial-gradient(circle at 30% 30%, var(--accent) 0 40%, transparent 60%) }
+    .blob.b2{ width: 320px; height: 320px; left: -120px; bottom: -120px;
+      background: radial-gradient(circle at 70% 70%, var(--accent-2) 0 40%, transparent 60%) }
+    @media (max-width: 420px){ .blob.b1, .blob.b2{ display:none } }
+
+    /* Toolbar (theme, hue, print) */
+    .toolbar{ position: fixed; right: 16px; bottom: 16px; z-index: 1000; display: flex; flex-direction: column; gap: 10px }
+    .tool{ width: 48px; height: 48px; min-width:48px; min-height:48px;
+      border-radius: 12px; border: 1px solid var(--border); display: grid; place-items: center;
+      background: linear-gradient(180deg, var(--glass), transparent); box-shadow: var(--shadow); cursor: pointer }
+    .dots{ display:flex; gap:6px; padding:8px; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg,var(--glass),transparent) }
+    .dot{ width: 18px; height: 18px; border-radius: 999px; outline: 2px solid rgba(0,0,0,.15); cursor: pointer }
+    .dot:focus-visible{ outline: 3px solid var(--fg) }
+    @media (max-width: 520px){
+      .toolbar{ left: 50%; right:auto; bottom: 10px; transform: translateX(-50%); flex-direction: row; flex-wrap: wrap; gap:8px }
+      .dots{ padding:6px }
+      .tool{ width:44px; height:44px }
+    }
+
+    /* Timeline */
+    .timeline{ position: relative; margin-left: 4px; padding-left: 14px }
+    .timeline::before{ content:""; position:absolute; left:0; top:6px; bottom:6px; width:2px;
+      background: linear-gradient(var(--accent), var(--accent-2)) }
+    .timeline .item{ position: relative; margin: 10px 0; padding: 10px 14px; border-radius: 14px;
+      border: 1px solid var(--border); background: linear-gradient(180deg, var(--glass), transparent) }
+    .timeline .item::before{ content:""; position:absolute; left:-7px; top:16px; width:12px; height:12px; border-radius:50%;
+      background: var(--accent); box-shadow: 0 0 0 3px var(--bg) }
+    .meta{ color: var(--muted); font-size: var(--step--1); margin-bottom: 6px }
+    ul{ margin: 0 0 0 18px; padding: 0 }
+    li{ margin: 4px 0 }
+
+    /* Print */
     @media print{
-      .toolbar,.progress{display:none !important}
-      body{background:#fff;color:#000}
-      a{text-decoration:none}
-      .card,.ring,.timeline .item{break-inside:avoid}
+      .toolbar, .progress{ display: none !important }
+      body{ background: #fff; color: #000 }
+      a{ text-decoration: none }
+      .card, .timeline .item{ break-inside: avoid }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important }
     }
   </style>
 </head>
@@ -181,7 +175,7 @@
   <!-- Scroll Progress -->
   <div class="progress" aria-hidden="true"><div class="bar"></div></div>
 
-  <!-- Floating Tools: theme, accent colors, print -->
+  <!-- Floating Tools -->
   <div class="toolbar" aria-label="Quick actions">
     <button class="tool" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌗</button>
     <div class="dots" role="group" aria-label="Accent colors">
@@ -219,7 +213,7 @@
       </div>
 
       <div class="card tilt">
-        <div class="kv">
+        <div class="kv" style="display:grid; grid-template-columns: 120px 1fr; gap:10px">
           <div>Location</div><div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressCountry">Lebanon</span></div>
           <div>Email</div><div><a href="mailto:taleensaeed8@gmail.com">taleensaeed8@gmail.com</a></div>
           <div>Phone</div><div><a href="tel:+96171065292">+961&nbsp;71&nbsp;065&nbsp;292</a></div>
@@ -238,41 +232,35 @@
     <section id="skills" class="section">
       <h2>Skills &amp; Tools</h2>
       <div class="grid cols-3">
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>Instruction &amp; Curriculum</h3>
-            <ul>
-              <li>Curriculum alignment (US/UK)</li>
-              <li>Inquiry‑ &amp; project‑based learning</li>
-              <li>Differentiation &amp; inclusion</li>
-              <li>Formative &amp; summative assessment</li>
-              <li>Lab management &amp; safety</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>Instruction &amp; Curriculum</h3>
+          <ul>
+            <li>Curriculum alignment (US/UK)</li>
+            <li>Inquiry‑ &amp; project‑based learning</li>
+            <li>Differentiation &amp; inclusion</li>
+            <li>Formative &amp; summative assessment</li>
+            <li>Lab management &amp; safety</li>
+          </ul>
         </div>
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>EdTech &amp; Platforms</h3>
-            <ul>
-              <li>MS Office · Google Classroom</li>
-              <li>Gizmos · Kahoot! · Quizlet</li>
-              <li>SimBio · Labster · STEM lab equipment</li>
-              <li>Google/Microsoft Forms</li>
-              <li>Alison · TES · Coursera · McGraw Hill</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>EdTech &amp; Platforms</h3>
+          <ul>
+            <li>MS Office · Google Classroom</li>
+            <li>Gizmos · Kahoot! · Quizlet</li>
+            <li>SimBio · Labster · STEM lab equipment</li>
+            <li>Google/Microsoft Forms</li>
+            <li>Alison · TES · Coursera · McGraw Hill</li>
+          </ul>
         </div>
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>Strengths</h3>
-            <ul>
-              <li>Communication &amp; collaboration</li>
-              <li>Leadership &amp; classroom management</li>
-              <li>Time management &amp; adaptability</li>
-              <li>Critical thinking &amp; problem solving</li>
-              <li>Student wellness &amp; pastoral care</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>Strengths</h3>
+          <ul>
+            <li>Communication &amp; collaboration</li>
+            <li>Leadership &amp; classroom management</li>
+            <li>Time management &amp; adaptability</li>
+            <li>Critical thinking &amp; problem solving</li>
+            <li>Student wellness &amp; pastoral care</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -281,7 +269,7 @@
     <section id="experience" class="section">
       <h2>Experience</h2>
       <div class="timeline">
-        <div class="item tilt">
+        <div class="item card">
           <h3>Online Tutoring — International Students</h3>
           <div class="meta">Science, Biology &amp; Chemistry Tutor · 2024–2025</div>
           <ul>
@@ -290,7 +278,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Al Majd Charter School (Adar Education) — UAE</h3>
           <div class="meta">Science &amp; Biology Teacher · 2022–2024</div>
           <ul>
@@ -302,17 +290,17 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>British International School — Kurdistan</h3>
           <div class="meta">Biology Teacher · 2022</div>
           <ul>
-            <li>Delivered AP, A‑Level, and AS Biology; aligned with US/UK standards.</li>
+            <li>Delivered AP, A‑Level, and AS Biology aligned with US/UK standards.</li>
             <li>Inquiry‑based lessons to build mastery of advanced concepts.</li>
             <li>Integrated labs and fieldwork to reinforce theory and critical thinking.</li>
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>The International School of Choueifat — Iraq</h3>
           <div class="meta">Science Teacher · 2021–2022</div>
           <ul>
@@ -322,7 +310,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Access International School — Lebanon</h3>
           <div class="meta">Science Teacher (Biology, Chemistry, Health) · 2017–2020</div>
           <ul>
@@ -332,7 +320,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Khalwat Falougha Official School — Lebanon</h3>
           <div class="meta">Science Teacher · 2016–2017</div>
           <ul>
@@ -341,7 +329,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Qoubbei Institute (After School) — Lebanon</h3>
           <div class="meta">Science Instructor · 2016–2017</div>
           <ul>
@@ -349,7 +337,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Private Tutor — Lebanon &amp; International</h3>
           <div class="meta">Science, Chemistry &amp; Biology Tutor · 2012–2021</div>
           <ul>
@@ -358,7 +346,7 @@
           </ul>
         </div>
 
-        <div class="item tilt">
+        <div class="item card">
           <h3>Pharmavie &amp; Omaya’s Pharmacies — Lebanon</h3>
           <div class="meta">Pharmacist · 2013–2015</div>
           <ul>
@@ -400,36 +388,30 @@
     <section id="certs" class="section">
       <h2>Certifications &amp; Awards</h2>
       <div class="grid cols-3">
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>Highlights</h3>
-            <ul>
-              <li><strong>Top MAP Teacher Performance</strong> — Al Majd Charter School (Girls School), UAE · 2023–2024</li>
-              <li><strong>Smarter Teaching, Not Harder: How AI Can Actually Help?</strong> — McGraw Hill · 2025</li>
-              <li><strong>AI for Educators</strong> — Alison · 2024</li>
-              <li><strong>ADEK: PISA 2025 / PIRLS 2026</strong> — 2024</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>Highlights</h3>
+          <ul>
+            <li><strong>Top MAP Teacher Performance</strong> — Al Majd Charter School (Girls School), UAE · 2023–2024</li>
+            <li><strong>Smarter Teaching, Not Harder: How AI Can Actually Help?</strong> — McGraw Hill · 2025</li>
+            <li><strong>AI for Educators</strong> — Alison · 2024</li>
+            <li><strong>ADEK: PISA 2025 / PIRLS 2026</strong> — 2024</li>
+          </ul>
         </div>
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>Safety &amp; Wellbeing</h3>
-            <ul>
-              <li>Emergency First Aid at Work — 2023</li>
-              <li>Children &amp; Young People’s Mental Health (Distinction) — 2021</li>
-              <li>Fire Safety · Health &amp; Safety (TES/Aldar) — 2022–2023</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>Safety &amp; Wellbeing</h3>
+          <ul>
+            <li>Emergency First Aid at Work — 2023</li>
+            <li>Children &amp; Young People’s Mental Health (Distinction) — 2021</li>
+            <li>Fire Safety · Health &amp; Safety (TES/Aldar) — 2022–2023</li>
+          </ul>
         </div>
-        <div class="ring tilt">
-          <div class="inner">
-            <h3>Pedagogy &amp; Digital Learning</h3>
-            <ul>
-              <li>Flipped Classroom, Assessment for Learning — TES · 2023</li>
-              <li>Scaling Skills with Digital Learning — THE/Coursera · 2021</li>
-              <li>STEM Inquiry &amp; Mindset — Gizmos · 2021</li>
-            </ul>
-          </div>
+        <div class="card tilt">
+          <h3>Pedagogy &amp; Digital Learning</h3>
+          <ul>
+            <li>Flipped Classroom, Assessment for Learning — TES · 2023</li>
+            <li>Scaling Skills with Digital Learning — THE/Coursera · 2021</li>
+            <li>STEM Inquiry &amp; Mindset — Gizmos · 2021</li>
+          </ul>
         </div>
       </div>
       <p class="soft" style="margin-top:8px">Full list available on request.</p>
@@ -451,46 +433,40 @@
       <h2>Contact</h2>
       <div class="grid cols-2">
         <div class="card tilt">
-          <div class="kv">
+          <div class="kv" style="display:grid; grid-template-columns: 120px 1fr; gap:10px">
             <div>Email</div><div><a href="mailto:taleensaeed8@gmail.com">taleensaeed8@gmail.com</a></div>
             <div>Phone</div><div><a href="tel:+96171065292">+961 71 065 292</a></div>
             <div>Location</div><div>Lebanon</div>
           </div>
         </div>
         <div class="card tilt">
-          <p><strong>Tip:</strong> Use the printer icon (bottom‑right) to export a polished PDF for applications.</p>
+          <p><strong>Tip:</strong> Use the printer icon to export a polished PDF for applications.</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="container soft">
-    © <span itemprop="name">Taline Said</span>. <span id="stamp"></span>. Built with love and CSS gradients.
+    © <span itemprop="name">Taline Said</span>. Last updated August 15, 2025. Built with love and responsive CSS.
   </footer>
 
-  <!-- Minimal JS for theme, accent, progress, print -->
   <script>
-    // Theme toggle
-    const themeBtn = document.getElementById('themeToggle');
-    const printBtn = document.getElementById('printBtn');
-    const dots = document.querySelectorAll('.dot');
+    // Theme toggle + persist
     const root = document.documentElement;
-
-    // Persisted theme
+    const themeBtn = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme){ document.documentElement.dataset.theme = savedTheme; }
     themeBtn.addEventListener('click', () => {
       const cur = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
       document.documentElement.dataset.theme = cur;
       if(cur === 'light'){
-        // Light overrides via data-theme
         root.style.setProperty('--bg', '#fcfdff');
         root.style.setProperty('--fg', '#102132');
         root.style.setProperty('--muted', '#516170');
         root.style.setProperty('--card', 'rgba(0,0,0,0.04)');
         root.style.setProperty('--glass', 'rgba(0,0,0,0.05)');
         root.style.setProperty('--border', 'rgba(0,0,0,0.10)');
-        root.style.setProperty('--shadow', '0 20px 40px rgba(0,0,0,.12)');
+        root.style.setProperty('--shadow', '0 16px 36px rgba(0,0,0,.12)');
       }else{
         root.style.removeProperty('--bg');
         root.style.removeProperty('--fg');
@@ -503,8 +479,8 @@
       localStorage.setItem('theme', cur);
     });
 
-    // Accent color switching
-    dots.forEach(d => d.addEventListener('click', () => {
+    // Accent color switching + persist
+    document.querySelectorAll('.dot').forEach(d => d.addEventListener('click', () => {
       const hue = d.getAttribute('data-hue');
       root.style.setProperty('--h', hue);
       try{ localStorage.setItem('hue', hue); }catch(e){}
@@ -513,13 +489,7 @@
     if(savedHue){ root.style.setProperty('--h', savedHue); }
 
     // Print
-    printBtn.addEventListener('click', () => window.print());
-
-    // Footer stamp
-    const stamp = document.getElementById('stamp');
-    const now = new Date();
-    const fmt = now.toLocaleString(undefined, { month: 'long', day:'numeric', year:'numeric' });
-    stamp.textContent = Last updated ${fmt};
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
 
     // Scroll progress
     const bar = document.querySelector('.progress .bar');
